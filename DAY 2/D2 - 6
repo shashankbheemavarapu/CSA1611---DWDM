@@ -1,0 +1,33 @@
+# Question 6: Multiple Lines in Line Chart
+
+# Clear previous variables
+rm(list = ls())
+
+# Load mtcars dataset
+data <- mtcars
+
+# Plot mpg and qsec as multiple lines
+plot(
+  data$mpg,
+  type = "o",
+  col = "blue",
+  xlab = "Car Index",
+  ylab = "Values",
+  main = "Multiple Line Chart of MPG and QSEC",
+  ylim = range(c(data$mpg, data$qsec))
+)
+
+lines(
+  data$qsec,
+  type = "o",
+  col = "red"
+)
+
+# Add legend
+legend(
+  "topright",
+  legend = c("mpg", "qsec"),
+  col = c("blue", "red"),
+  lty = 1,
+  pch = 1
+)
