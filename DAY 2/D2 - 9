@@ -1,0 +1,31 @@
+# ============================================================
+# DWDM - Question 9
+# Boxplot to Identify Outliers in Tennis Players' Scores
+# ============================================================
+
+# Clear previous variables
+rm(list = ls())
+
+# Points scored by tennis players
+points <- c(
+  45, 52, 48, 55, 60,
+  50, 47, 53, 58, 62,
+  49, 51, 56, 54, 120
+)
+
+# Display the data
+print(points)
+
+# Create boxplot
+boxplot(
+  points,
+  main = "Boxplot of Points Scored by Tennis Players",
+  ylab = "Points Scored",
+  col = "lightblue",
+  pch = 19
+)
+
+# Identify outliers
+outliers <- boxplot.stats(points)$out
+
+cat("\nOutlier(s):", outliers, "\n")
