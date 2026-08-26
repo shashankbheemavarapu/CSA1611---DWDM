@@ -1,0 +1,86 @@
+# ============================================================
+# DWDM - Question 4
+# Data Normalization
+# ============================================================
+
+# Clear previous variables
+rm(list = ls())
+
+# ------------------------------------------------------------
+# Step 1: Enter the data
+# ------------------------------------------------------------
+
+data <- c(200, 300, 400, 600, 1000)
+
+cat("Original Data:\n")
+print(data)
+
+
+# ------------------------------------------------------------
+# Step 2: Find minimum and maximum
+# ------------------------------------------------------------
+
+minimum <- min(data)
+maximum <- max(data)
+
+cat("\nMinimum =", minimum, "\n")
+cat("Maximum =", maximum, "\n")
+
+
+# ------------------------------------------------------------
+# Step 3: Min-Max Normalization
+# Range: 0 to 1
+# Formula: (x - min) / (max - min)
+# ------------------------------------------------------------
+
+min_max <- (data - minimum) / (maximum - minimum)
+
+cat("\n========== MIN-MAX NORMALIZATION ==========\n")
+
+print(round(min_max, 3))
+
+
+# ------------------------------------------------------------
+# Step 4: Calculate Mean
+# ------------------------------------------------------------
+
+mean_value <- mean(data)
+
+cat("\nMean =", mean_value, "\n")
+
+
+# ------------------------------------------------------------
+# Step 5: Calculate Standard Deviation
+# ------------------------------------------------------------
+
+standard_deviation <- sd(data)
+
+cat("Standard Deviation =", round(standard_deviation, 3), "\n")
+
+
+# ------------------------------------------------------------
+# Step 6: Z-Score Normalization
+# Formula: (x - mean) / standard deviation
+# ------------------------------------------------------------
+
+z_score <- (data - mean_value) / standard_deviation
+
+cat("\n========== Z-SCORE NORMALIZATION ==========\n")
+
+print(round(z_score, 3))
+
+
+# ------------------------------------------------------------
+# Step 7: Create comparison table
+# ------------------------------------------------------------
+
+result <- data.frame(
+  Original_Value = data,
+  Min_Max_Normalized = round(min_max, 3),
+  Z_Score_Normalized = round(z_score, 3)
+)
+
+cat("\n========== FINAL RESULT ==========\n")
+
+print(result)
+
