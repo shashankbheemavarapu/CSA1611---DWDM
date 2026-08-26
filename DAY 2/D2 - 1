@@ -1,0 +1,26 @@
+# Create the dataset
+photo <- data.frame(
+  Age = c("5-6", "7-8", "9-10"),
+  A = c(18, 2, 20),
+  B = c(22, 28, 10),
+  C = c(20, 40, 40)
+)
+
+# Display dataset
+print(photo)
+
+# 1. Sample covariance between B and C
+cov_BC <- cov(photo$B, photo$C)
+print(cov_BC)
+
+# 2. Sample covariance matrix
+cov_matrix <- cov(photo[, c("A", "B", "C")])
+print(cov_matrix)
+
+# 3. Sample correlation between B and C
+cor_BC <- cor(photo$B, photo$C)
+print(cor_BC)
+
+# 4. Sample correlation matrix
+cor_matrix <- cor(photo[, c("A", "B", "C")])
+print(cor_matrix)
