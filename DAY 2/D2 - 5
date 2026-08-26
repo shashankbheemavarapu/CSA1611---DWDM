@@ -1,0 +1,17 @@
+# Question 5: Histogram for AirPassengers
+
+# Clear previous variables
+rm(list = ls())
+
+# Load the built-in AirPassengers dataset
+data <- AirPassengers
+
+# Create histogram
+hist(
+  data,
+  breaks = c(100, 200, 350, 500, 650, 800),
+  main = "Histogram of AirPassengers",
+  xlab = "Number of Air Passengers",
+  ylab = "Frequency",
+  right = FALSE
+)
