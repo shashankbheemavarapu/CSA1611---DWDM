@@ -1,0 +1,101 @@
+# ============================================================
+# DWDM - Question 10
+# Blood Pressure vs Age using diabetes.csv
+# ============================================================
+
+# Clear previous variables
+rm(list = ls())
+
+# ------------------------------------------------------------
+# 1. Load the CSV file
+# ------------------------------------------------------------
+
+diabetes <- read.csv(
+  "C:/Users/HP/Downloads/diabetes.csv"
+)
+
+# Check the data
+head(diabetes)
+
+# Check column names
+print(names(diabetes))
+
+
+# ------------------------------------------------------------
+# 2. Scatter Plot: Blood Pressure vs Age
+# ------------------------------------------------------------
+
+plot(
+  diabetes$Age,
+  diabetes$BloodPressure,
+  main = "Blood Pressure vs Age",
+  xlab = "Age",
+  ylab = "Blood Pressure",
+  pch = 19
+)
+
+
+# ------------------------------------------------------------
+# 3. Create Age Groups
+# ------------------------------------------------------------
+
+diabetes$AgeGroup <- cut(
+  diabetes$Age,
+  breaks = c(20, 30, 40, 50, 60, 100),
+  labels = c(
+    "21-30",
+    "31-40",
+    "41-50",
+    "51-60",
+    "61+"
+  ),
+  include.lowest = TRUE
+)
+
+
+# ------------------------------------------------------------
+# 4. Calculate Average Blood Pressure for Each Age Group
+# ------------------------------------------------------------
+
+avg_bp <- aggregate(
+  BloodPressure ~ AgeGroup,
+  data = diabetes,
+  FUN = mean
+)
+
+# Display result
+print(avg_bp)
+
+
+# ------------------------------------------------------------
+# 5. Bar Chart
+# ------------------------------------------------------------
+
+barplot(
+  avg_bp$BloodPressure,
+  names.arg = avg_bp$AgeGroup,
+  main = "Average Blood Pressure by Age Group",
+  xlab = "Age Group",
+  ylab = "Average Blood Pressure",
+  ylim = c(0, max(avg_bp$BloodPressure) + 20)
+)
+
+
+# ------------------------------------------------------------
+# 6. Find Age Group with Highest Blood Pressure
+# ------------------------------------------------------------
+
+highest <- avg_bp[which.max(avg_bp$BloodPressure), ]
+
+cat(
+  "\nAge group with highest average Blood Pressure:",
+  as.character(highest$AgeGroup),
+  "\n"
+)
+
+cat(
+  "Highest average Blood Pressure:",
+  round(highest$BloodPressure, 2),
+  "\n"
+)
+
