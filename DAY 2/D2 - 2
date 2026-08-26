@@ -1,0 +1,145 @@
+# ============================================================
+# DWDM - Equal Frequency Partitioning and Data Smoothing
+# ============================================================
+
+# 1. Enter the data
+
+prices <- c(
+  1, 1, 5, 5, 5, 5, 5, 8, 8, 10,
+  10, 10, 10, 12, 14, 14, 14, 15, 15,
+  15, 15, 15, 15, 18, 18, 18, 18, 18,
+  18, 18, 18, 20, 20, 20, 20, 20, 20,
+  20, 21, 21, 21, 21, 25, 25, 25, 25,
+  25, 28, 28, 30, 30, 30, 30
+)
+
+# Display data
+print(prices)
+
+# Number of observations
+cat("Number of observations =", length(prices), "\n")
+
+
+# ============================================================
+# 2. Equal-Frequency Partitioning
+# Bin size = 3
+# ============================================================
+
+bin_size <- 3
+
+bins <- split(
+  prices,
+  ceiling(seq_along(prices) / bin_size)
+)
+
+cat("\n========== EQUAL FREQUENCY BINS ==========\n")
+
+for (i in seq_along(bins)) {
+  cat(
+    "Bin", i, ":",
+    paste(bins[[i]], collapse = ", "),
+    "\n"
+  )
+}
+
+
+# ============================================================
+# 3. Smoothing by Bin Means
+# ============================================================
+
+mean_smoothed <- c()
+
+cat("\n========== BIN MEAN SMOOTHING ==========\n")
+
+for (i in seq_along(bins)) {
+  
+  bin <- bins[[i]]
+  
+  bin_mean <- mean(bin)
+  
+  smoothed_bin <- rep(bin_mean, length(bin))
+  
+  mean_smoothed <- c(mean_smoothed, smoothed_bin)
+  
+  cat(
+    "Bin", i,
+    "Original =", paste(bin, collapse = ", "),
+    "| Mean =", round(bin_mean, 2),
+    "| Smoothed =", paste(round(smoothed_bin, 2), collapse = ", "),
+    "\n"
+  )
+}
+
+
+# ============================================================
+# 4. Smoothing by Bin Boundaries
+# ============================================================
+
+boundary_smoothed <- c()
+
+cat("\n========== BIN BOUNDARY SMOOTHING ==========\n")
+
+for (i in seq_along(bins)) {
+  
+  bin <- bins[[i]]
+  
+  lower <- min(bin)
+  upper <- max(bin)
+  
+  smoothed_bin <- sapply(bin, function(x) {
+    
+    distance_lower <- abs(x - lower)
+    distance_upper <- abs(x - upper)
+    
+    if (distance_lower <= distance_upper) {
+      lower
+    } else {
+      upper
+    }
+  })
+  
+  boundary_smoothed <- c(
+    boundary_smoothed,
+    smoothed_bin
+  )
+  
+  cat(
+    "Bin", i,
+    "Original =", paste(bin, collapse = ", "),
+    "| Boundaries =", lower, "and", upper,
+    "| Smoothed =", paste(smoothed_bin, collapse = ", "),
+    "\n"
+  )
+}
+
+
+# ============================================================
+# 5. Comparison Table
+# ============================================================
+
+result <- data.frame(
+  Original = prices,
+  Bin_Mean = mean_smoothed,
+  Bin_Boundary = boundary_smoothed
+)
+
+cat("\n========== COMPARISON TABLE ==========\n")
+
+print(result)
+
+
+# ============================================================
+# 6. Histogram of Original Data
+# ============================================================
+
+hist(
+  prices,
+  main = "Histogram of All Electronics Prices",
+  xlab = "Price",
+  ylab = "Frequency",
+  breaks = seq(
+    min(prices) - 0.5,
+    max(prices) + 0.5,
+    by = 2
+  )
+)
