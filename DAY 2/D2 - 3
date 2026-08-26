@@ -1,0 +1,123 @@
+# ============================================================
+# DWDM - Question 3
+# Comparison of Class A and Class B
+# ============================================================
+
+# ------------------------------------------------------------
+# Step 1: Enter the marks
+# ------------------------------------------------------------
+
+Class_A <- c(
+  76, 35, 47, 64, 95, 66, 89, 36, 84,
+  76, 35, 47, 64, 95, 66, 89, 36, 84
+)
+
+Class_B <- c(
+  51, 56, 84, 60, 59, 70, 63, 66, 50,
+  51, 56, 84, 60, 59, 70, 63, 66, 50
+)
+
+
+# ------------------------------------------------------------
+# Step 2: Calculate Mean
+# ------------------------------------------------------------
+
+mean_A <- mean(Class_A)
+mean_B <- mean(Class_B)
+
+cat("Mean of Class A =", mean_A, "\n")
+cat("Mean of Class B =", mean_B, "\n")
+
+
+# ------------------------------------------------------------
+# Step 3: Calculate Median
+# ------------------------------------------------------------
+
+median_A <- median(Class_A)
+median_B <- median(Class_B)
+
+cat("Median of Class A =", median_A, "\n")
+cat("Median of Class B =", median_B, "\n")
+
+
+# ------------------------------------------------------------
+# Step 4: Calculate Range
+# ------------------------------------------------------------
+
+range_A <- max(Class_A) - min(Class_A)
+range_B <- max(Class_B) - min(Class_B)
+
+cat("Range of Class A =", range_A, "\n")
+cat("Range of Class B =", range_B, "\n")
+
+
+# ------------------------------------------------------------
+# Step 5: Display minimum and maximum values
+# ------------------------------------------------------------
+
+cat("\nClass A Minimum =", min(Class_A), "\n")
+cat("Class A Maximum =", max(Class_A), "\n")
+
+cat("\nClass B Minimum =", min(Class_B), "\n")
+cat("Class B Maximum =", max(Class_B), "\n")
+
+
+# ------------------------------------------------------------
+# Step 6: Compare the classes
+# ------------------------------------------------------------
+
+cat("\n========== COMPARISON ==========\n")
+
+if (mean_A > mean_B) {
+  cat("Higher Mean: Class A\n")
+} else {
+  cat("Higher Mean: Class B\n")
+}
+
+if (median_A > median_B) {
+  cat("Higher Median: Class A\n")
+} else {
+  cat("Higher Median: Class B\n")
+}
+
+if (range_A > range_B) {
+  cat("Higher Range: Class A\n")
+} else {
+  cat("Higher Range: Class B\n")
+}
+
+
+# ------------------------------------------------------------
+# Step 7: Create Boxplot
+# ------------------------------------------------------------
+
+marks <- list(
+  "Class A" = Class_A,
+  "Class B" = Class_B
+)
+
+boxplot(
+  marks,
+  main = "Boxplot of Year 9 Mathematics Exam Scores",
+  xlab = "Class",
+  ylab = "Exam Marks",
+  col = c("lightblue", "lightgreen")
+)
+
+
+# ------------------------------------------------------------
+# Step 8: Display summary statistics
+# ------------------------------------------------------------
+
+cat("\n========== SUMMARY ==========\n")
+
+cat("Class A:\n")
+cat("Mean   =", mean_A, "\n")
+cat("Median =", median_A, "\n")
+cat("Range  =", range_A, "\n")
+
+cat("\nClass B:\n")
+cat("Mean   =", mean_B, "\n")
+cat("Median =", median_B, "\n")
+cat("Range  =", range_B, "\n")
+
